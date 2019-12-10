@@ -1,11 +1,15 @@
 package com.feri.car.user.web;
 
 import com.feri.car.common.vo.R;
+import com.feri.car.dto.MemberQueryDto;
+import com.feri.car.user.entity.Member;
 import com.feri.car.user.service.MemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -27,5 +31,20 @@ public class MemberController {
         return memberService.queryByMsg(msg);
     }
 
+    @ApiOperation(value = "实现会员的注册",notes = "实现会员的注册")
+    @PostMapping("/api/user/member/register.do")
+    public R register(@RequestBody Member member){
+        return memberService.register(member);
+    }
+    @ApiOperation(value = "实现会员的登录",notes = "实现会员的登录")
+    @GetMapping("/api/user/member/login.do")
+    public R login(String name,String password){
+        return memberService.login(name, password);
+    }
 
+    @ApiOperation(value = "查询全部内容分页",notes = "查询全部内容分页")
+    @PostMapping("/api/user/member/checkName.do")
+    public R page(@RequestBody MemberQueryDto queryDto){
+        return memberService.search(queryDto);
+    }
 }

@@ -5,5 +5,4 @@ import java.util.List;
 
 public interface MemberCarMapper {
     int insert(MemberCar record);
-
 }
