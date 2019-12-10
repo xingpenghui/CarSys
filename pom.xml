@@ -21,6 +21,7 @@
 		<mybatisboot.version>2.1.1</mybatisboot.version>
 		<mysql.version>8.0.18</mysql.version>
 		<druid.version>1.1.20</druid.version>
+		<swgger2.version>2.9.2</swgger2.version>
 	</properties>
 
 	<!--3、限定版本-->
@@ -41,14 +42,36 @@
 				<artifactId>mysql-connector-java</artifactId>
 				<version>${mysql.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>io.springfox</groupId>
+				<artifactId>springfox-swagger2</artifactId>
+				<version>${swgger2.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.springfox</groupId>
+				<artifactId>springfox-swagger-ui</artifactId>
+				<version>${swgger2.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
 	<!--4、依赖 下载jar-->
 	<dependencies>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
