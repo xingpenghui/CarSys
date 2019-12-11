@@ -3,11 +3,15 @@ package com.feri.car.user.service.impl;
 import com.feri.car.common.result.ResultCode;
 import com.feri.car.common.vo.PageBean;
 import com.feri.car.common.vo.R;
+import com.feri.car.config.RedisKeyConfig;
 import com.feri.car.dto.MemberQueryDto;
 import com.feri.car.user.dao.MemberMapper;
 import com.feri.car.user.entity.Member;
 import com.feri.car.user.service.MemberService;
+import com.feri.car.util.JedisUtil;
+import com.feri.car.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -21,6 +25,8 @@ import java.util.List;
 public class MemberServiceImpl implements MemberService {
     @Autowired
     private MemberMapper memberMapper;
+    @Autowired
+    private JedisUtil jedisUtil;
     @Override
     public R queryByMsg(String msg) {
         Member member=memberMapper.selectByMsg(msg);
@@ -56,9 +62,11 @@ public class MemberServiceImpl implements MemberService {
         if(m!=null){
             //3、校验密码是否正确
             if(m.getPassword().equals(pass)){
-                //4、成功
+                //4、成功 生成令牌 存储为当前会员的id信息
+                String token= JwtUtil.createJWT(m.getId()+"");
                 //令牌 Token 有效期  Redis  有效期
-                return R.Ok(m.getId());
+                jedisUtil.addStr(RedisKeyConfig.TOKEN_KEY +name,token,RedisKeyConfig.TOEKN_TIME);
+                return R.Ok(token);
             }
         }
         return R.fail("用户名或密码错误");
