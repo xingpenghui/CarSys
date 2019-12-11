@@ -38,7 +38,7 @@ public class SmsServiceImpl implements SmsService {
             code= RandomUtil.createNum(4);
         }
         //2、发送短信
-        AliSmsUtil.sendSmsCode(code);
+        AliSmsUtil.sendSmsCode(phone,code);
         //3、验证码记录到Redis
         jedisUtil.addStr(RedisKeyConfig.SMS_CODE+phone,code+"",RedisKeyConfig.SMSCODE_TIME);
         return R.Ok();
