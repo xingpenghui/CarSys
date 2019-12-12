@@ -8,7 +8,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 //开关类
 @SpringBootApplication //标记 这是SpringBoot项目
 @EnableSwagger2 //启用Swagger的扫描
-@MapperScan("com.feri.car.user.dao")
+@MapperScan("com.feri.car.user.dao,com.feri.car.oss.dao")
 public class CarSysApplication {
 	//main方法
 	public static void main(String[] args) {

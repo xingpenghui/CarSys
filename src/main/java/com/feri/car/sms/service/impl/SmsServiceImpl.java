@@ -7,7 +7,6 @@ import com.feri.car.sms.service.SmsService;
 import com.feri.car.util.AliSmsUtil;
 import com.feri.car.util.JedisUtil;
 import com.feri.car.util.RandomUtil;
-import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +28,7 @@ public class SmsServiceImpl implements SmsService {
             //验证码未失效
             //1、更改有效期 重新设置为10分钟
             code=Integer.parseInt(jedisUtil.getStr(RedisKeyConfig.SMS_CODE+phone));
-            jedisUtil.setExpire(RedisKeyConfig.SMS_CODE+phone,RedisKeyConfig.SMSCODE_TIME);
+            //jedisUtil.setExpire(RedisKeyConfig.SMS_CODE+phone,RedisKeyConfig.SMSCODE_TIME);
             //2、检测有效期剩余超过1半 不改变直接返回 小于一半 重新更新有效期
             //3、重新生成 把原来覆盖
 
