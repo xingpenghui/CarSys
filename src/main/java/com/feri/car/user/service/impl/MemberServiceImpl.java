@@ -75,7 +75,8 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public R search(MemberQueryDto memberQueryDto) {
         //查询所有的数据
-        List<Member> memberList=memberMapper.selectPage(memberQueryDto.getPage(),memberQueryDto.getSize());
+        List<Member> memberList=memberMapper.selectPage((memberQueryDto.getPage()-1)*memberQueryDto.getSize(),
+                memberQueryDto.getSize());
         //实例化分页类
         PageBean<Member> pageBean=new PageBean<>();
         pageBean.setData(memberList);

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feri.car.news.dao.ArticleCategoryMapper">
+  <resultMap id="BaseResultMap" type="com.feri.car.news.entity.ArticleCategory">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="is_deleted" jdbcType="TINYINT" property="isDeleted" />
+    <result column="sort_num" jdbcType="INTEGER" property="sortNum" />
+    <result column="create_time" jdbcType="INTEGER" property="createTime" />
+    <result column="last_update_time" jdbcType="INTEGER" property="lastUpdateTime" />
+  </resultMap>
+  <insert id="insert" parameterType="com.feri.car.news.entity.ArticleCategory">
+    insert into article_category (name, is_deleted,
+      sort_num, create_time, last_update_time )
+    values ( #{name,jdbcType=VARCHAR}, #{isDeleted,jdbcType=TINYINT},
+      #{sortNum,jdbcType=INTEGER}, #{createTime,jdbcType=INTEGER}, #{lastUpdateTime,jdbcType=INTEGER} )
+  </insert>
+
+</mapper>

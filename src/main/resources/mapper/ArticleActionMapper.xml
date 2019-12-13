@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feri.car.news.dao.ArticleActionMapper">
+  <resultMap id="BaseResultMap" type="com.feri.car.news.entity.ArticleAction">
+    <result column="id" jdbcType="BIGINT" property="id" />
+    <result column="aid" jdbcType="INTEGER" property="aid" />
+    <result column="ouid" jdbcType="INTEGER" property="ouid" />
+    <result column="oname" jdbcType="VARCHAR" property="oname" />
+    <result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="operate_type" jdbcType="TINYINT" property="operateType" />
+  </resultMap>
+  <insert id="insert" parameterType="com.feri.car.news.entity.ArticleAction">
+    insert into article_action ( aid, ouid,
+      oname, ctime, content, 
+      operate_type)
+    values (#{aid,jdbcType=INTEGER}, #{ouid,jdbcType=INTEGER},
+      #{oname,jdbcType=VARCHAR}, #{ctime,jdbcType=TIMESTAMP}, #{content,jdbcType=VARCHAR}, 
+      #{operateType,jdbcType=TINYINT})
+  </insert>
+
+</mapper>

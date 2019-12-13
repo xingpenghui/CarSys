@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feri.car.news.dao.ArticleMapper">
+
+
+  <insert id="insert" parameterType="com.feri.car.news.entity.Article">
+    insert into article ( title, category_id,
+      source, author, summary, 
+      cover_pic, thumb_pic, tags, 
+      preview_url, qrcode_url, pv_count, 
+      uv_count, comment_count, like_count, 
+      fav_count, share_count, channel_top, 
+      home_top, create_uid, create_uname, 
+      create_time, submit_uid, submit_time, 
+      state, state_order, publish_state, 
+      allow_up, allow_fav, content)
+    values ( #{title,jdbcType=VARCHAR}, #{categoryId,jdbcType=INTEGER},
+      #{source,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR}, 
+      #{coverPic,jdbcType=VARCHAR}, #{thumbPic,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR}, 
+      #{previewUrl,jdbcType=VARCHAR}, #{qrcodeUrl,jdbcType=VARCHAR}, #{pvCount,jdbcType=INTEGER}, 
+      #{uvCount,jdbcType=INTEGER}, #{commentCount,jdbcType=INTEGER}, #{likeCount,jdbcType=INTEGER}, 
+      #{favCount,jdbcType=INTEGER}, #{shareCount,jdbcType=INTEGER}, #{channelTop,jdbcType=TINYINT}, 
+      #{homeTop,jdbcType=TINYINT}, #{createUid,jdbcType=INTEGER}, #{createUname,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=INTEGER}, #{submitUid,jdbcType=INTEGER}, #{submitTime,jdbcType=INTEGER}, 
+      #{state,jdbcType=INTEGER}, #{stateOrder,jdbcType=INTEGER}, #{publishState,jdbcType=TINYINT}, 
+      #{allowUp,jdbcType=TINYINT}, #{allowFav,jdbcType=TINYINT}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <select id="selectById" resultType="com.feri.car.news.entity.Article">
+    select * from article where id=#{id}
+  </select>
+  <select id="selectAll" resultType="com.feri.car.news.entity.Article">
+    select * from article
+    <where>
+      <if test="title">
+        title like #{title}
+      </if>
+      <if test="type">
+        and category_id=#{type}
+      </if>
+    </where>
+    order by id desc;
+  </select>
+  <update id="update">
+    update article set publish_state=0 where id=#{id}
+  </update>
+</mapper>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feri.car.news.dao.ArticleTouchMapper">
+  <resultMap id="BaseResultMap" type="com.feri.car.news.entity.ArticleTouch">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="mid" jdbcType="INTEGER" property="mid" />
+    <result column="aid" jdbcType="INTEGER" property="aid" />
+    <result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
+  </resultMap>
+  <insert id="insert" parameterType="com.feri.car.news.entity.ArticleTouch" useGeneratedKeys="true" keyProperty="id">
+    insert into t_articletouch ( mid, aid, ctime)
+    values (#{mid,jdbcType=INTEGER}, #{aid,jdbcType=INTEGER},now())
+  </insert>
+  <select id="selectAll" resultType="com.feri.car.dto.ArticleTouchDto">
+    select ta.*,a.summary,a.title,a.cover_pic from t_articletouch ta inner join article a on ta.aid=a.id where ta.mid=#{mid} order by ta.ctime desc
+  </select>
+  <delete id="del" parameterType="com.feri.car.news.entity.ArticleTouch">
+    delete from t_articletouch where mid=#{mid} and aid=#{aid}
+  </delete>
+</mapper>
