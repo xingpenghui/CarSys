@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feri.car.msg.dao.MessageMapper">
+
+  <insert id="insert" parameterType="com.feri.car.msg.entity.Message">
+    insert into message (uid, title,
+      type, flag, ctime, detail)
+    values ( #{uid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR},
+      #{type,jdbcType=INTEGER}, #{flag,jdbcType=INTEGER},now(), #{detail,jdbcType=LONGVARCHAR})
+  </insert>
+  <select id="selectAll" resultType="com.feri.car.msg.entity.Message">
+    select * from message where uid=#{uid} order by ctime desc
+  </select>
+  <select id="selectById" resultType="com.feri.car.msg.entity.Message">
+    select * from message where id=#{id}
+  </select>
+</mapper>

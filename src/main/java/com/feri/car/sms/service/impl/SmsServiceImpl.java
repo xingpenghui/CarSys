@@ -48,7 +48,7 @@ public class SmsServiceImpl implements SmsService {
         //1、校验验证码有效性
         if(jedisUtil.checkKey(RedisKeyConfig.SMS_CODE+codeDto.getPhone())){
             //2、校验是否正确
-            if(codeDto.getCode()== Integer.parseInt(RedisKeyConfig.SMS_CODE+codeDto.getPhone())){
+            if(codeDto.getCode()== Integer.parseInt(jedisUtil.getStr(RedisKeyConfig.SMS_CODE+codeDto.getPhone()))){
                 return R.Ok();
             }
         }

@@ -38,7 +38,7 @@
         and category_id=#{type}
       </if>
     </where>
-    order by id desc;
+    order by id desc
   </select>
   <update id="update">
     update article set publish_state=0 where id=#{id}

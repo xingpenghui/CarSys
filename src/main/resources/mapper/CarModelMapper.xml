@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feri.car.car.dao.CarModelMapper">
+
+  <insert id="insert" parameterType="com.feri.car.car.entity.CarModel">
+    insert into car_model (brand_id, name,
+      display_name, english_name, body_form_name, 
+      price_low, price_high, level, 
+      level_name, level_second, level_second_name, 
+      sale_status, all_spell, create_time, 
+      update_time, sync_time)
+    values ( #{brandId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+      #{displayName,jdbcType=VARCHAR}, #{englishName,jdbcType=VARCHAR}, #{bodyFormName,jdbcType=VARCHAR}, 
+      #{priceLow,jdbcType=DECIMAL}, #{priceHigh,jdbcType=DECIMAL}, #{level,jdbcType=INTEGER}, 
+      #{levelName,jdbcType=VARCHAR}, #{levelSecond,jdbcType=INTEGER}, #{levelSecondName,jdbcType=VARCHAR}, 
+      #{saleStatus,jdbcType=TINYINT}, #{allSpell,jdbcType=VARCHAR}, now(), now(),now())
+  </insert>
+
+  <select id="selectByBid" resultType="com.feri.car.car.entity.CarModel">
+    select * from car_model  where brand_id=#{bid}
+  </select>
+</mapper>

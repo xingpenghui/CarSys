@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feri.car.activity.dao.ActivityMapper">
+
+  <insert id="insert" parameterType="com.feri.car.activity.entity.Activity">
+    insert into activity (title, category_id,
+      url, state, summary, 
+      link, begin_time, end_time, 
+      channel_top, home_top, pv_count, 
+      uv_count, publish_state, create_uid, 
+      create_time, author, unpublish_uname, 
+      unpublish_time, seo_keywords, sdk_path, 
+      like_count, share_count, view_count, 
+      tags, cover_pic, cars, 
+      sdk_id, sdk_title, dealer, 
+      description, seo_description)
+    values (#{title,jdbcType=VARCHAR}, #{categoryId,jdbcType=INTEGER},
+      #{url,jdbcType=VARCHAR}, #{state,jdbcType=TINYINT}, #{summary,jdbcType=VARCHAR}, 
+      #{link,jdbcType=VARCHAR}, #{beginTime,jdbcType=INTEGER}, #{endTime,jdbcType=INTEGER}, 
+      #{channelTop,jdbcType=TINYINT}, #{homeTop,jdbcType=TINYINT}, #{pvCount,jdbcType=INTEGER}, 
+      #{uvCount,jdbcType=INTEGER}, #{publishState,jdbcType=TINYINT}, #{createUid,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=INTEGER}, #{author,jdbcType=VARCHAR}, #{unpublishUname,jdbcType=VARCHAR}, 
+      #{unpublishTime,jdbcType=VARCHAR}, #{seoKeywords,jdbcType=VARCHAR}, #{sdkPath,jdbcType=VARCHAR}, 
+      #{likeCount,jdbcType=INTEGER}, #{shareCount,jdbcType=INTEGER}, #{viewCount,jdbcType=INTEGER}, 
+      #{tags,jdbcType=VARCHAR}, #{coverPic,jdbcType=VARCHAR}, #{cars,jdbcType=VARCHAR}, 
+      #{sdkId,jdbcType=INTEGER}, #{sdkTitle,jdbcType=VARCHAR}, #{dealer,jdbcType=VARCHAR}, 
+      #{description,jdbcType=LONGVARCHAR}, #{seoDescription,jdbcType=LONGVARCHAR})
+  </insert>
+  <select id="selectConver" resultType="com.feri.car.dto.ActivityDto">
+    select id,title name,cover_pic aurl,begin_time startTime,end_time endTime from activity where home_top=1 limit 5;
+  </select>
+  <select id="selectNew" resultType="com.feri.car.dto.ActivityDto">
+    select id,title name,cover_pic aurl,begin_time startTime,end_time endTime from activity
+  </select>
+  <select id="selectAll" resultType="com.feri.car.dto.ActivityDto">
+  select id,title name,cover_pic aurl,begin_time startTime,end_time endTime from activity where state!=2 order by begin_time desc;
+  </select>
+</mapper>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feri.car.activity.dao.UserActivityMapper">
+
+  <insert id="insert" parameterType="com.feri.car.activity.entity.UserActivity">
+    insert into t_useractivity (aid, uid,ctime, flag)
+    values ( #{aid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, now(), #{flag,jdbcType=INTEGER})
+  </insert>
+  <select id="selectByUid" resultType="com.feri.car.dto.UserActivityDto">
+    select ua.id,ua.aid,a.title name,a.cover_pic aurl,a.begin_time startTime,a.end_time endTime from t_useractivity ua left join activity a on ua.aid=a.id where ua.uid=#{uid} order by ua.ctime desc
+  </select>
+
+
+</mapper>

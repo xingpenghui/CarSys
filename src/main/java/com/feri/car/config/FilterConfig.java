@@ -1,5 +1,7 @@
 package com.feri.car.config;
 
+import com.feri.car.filter.AuthFilter;
+import com.feri.car.filter.CorsFilter;
 import com.feri.car.filter.SmsFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
@@ -20,6 +22,21 @@ public class FilterConfig {
         FilterRegistrationBean bean=new FilterRegistrationBean();
         bean.setFilter(new SmsFilter());
         bean.addUrlPatterns("/sendcode.do");
+        return bean;
+    }
+    //SpringBoot项目注册过滤器
+    @Bean
+    public FilterRegistrationBean createAH(){
+        FilterRegistrationBean bean=new FilterRegistrationBean();
+        bean.setFilter(new AuthFilter());
+        bean.addUrlPatterns("/*");
+        return bean;
+    }
+    @Bean
+    public FilterRegistrationBean creatCF(){
+        FilterRegistrationBean bean=new FilterRegistrationBean();
+        bean.setFilter(new CorsFilter());
+        bean.addUrlPatterns("/*");
         return bean;
     }
     //ServletRegistrationBean

@@ -51,6 +51,7 @@ public class ArticleServiceImpl implements ArticleService {
         //查询数据
         List<Article> list=mapper.selectAll(queryDto);
         PageInfo<Article> page=new PageInfo<>(list);
+        System.out.println(page.getList().size());
         return R.Ok(page);
     }
 

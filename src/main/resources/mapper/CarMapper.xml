@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feri.car.car.dao.CarMapper">
+
+  <insert id="insert" parameterType="com.feri.car.car.entity.Car">
+    insert into car (name, mid, display_name, price, sale_status,
+      create_time, update_time, sync_time)
+    values (#{name,jdbcType=VARCHAR}, #{mid,jdbcType=INTEGER},
+      #{displayName,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{saleStatus,jdbcType=TINYINT}, 
+     now(),now(),now());
+  </insert>
+  <select id="selectByMid" resultType="com.feri.car.car.entity.Car">
+    select * from car where brand_id=#{mid}
+  </select>
+  <select id="selectById" resultType="com.feri.car.dto.CarDetailDto">
+    select c.name,cd.cc,cd.gear,cd.oil,cd.speed,cm.name model,cb.name brand,o.url imgurl from car c
+    inner join caedetail cd on c.id=cd.cid
+    left join car_model cm on c.mid=cm.id
+    left join car_brand cb on cm.bid=cb.id
+    left join car_media cmi on c.id=cmi.cid
+    inner join t_ossurl o on cmi.oid=o.id
+    where  cmi.msort=1 and cmi.type=1 and c.id=#{id}
+  </select>
+</mapper>

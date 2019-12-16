@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feri.car.car.dao.CarBrandMapper">
+
+  <insert id="insert" parameterType="com.feri.car.car.entity.CarBrand">
+    insert into car_brand (name, english_name,
+      country, logo_url, first_char, 
+      introduction, sale_status, create_time, 
+      update_time, do_time, sync_time)
+    values (#{name,jdbcType=VARCHAR}, #{englishName,jdbcType=VARCHAR},
+      #{country,jdbcType=VARCHAR}, #{logoUrl,jdbcType=VARCHAR}, #{firstChar,jdbcType=VARCHAR}, 
+      #{introduction,jdbcType=VARCHAR}, #{saleStatus,jdbcType=TINYINT}, now(),now(), now(), now()})
+  </insert>
+  <select id="selectAll" resultType="com.feri.car.dto.CarBrandDto">
+    select id,name,logo_url logo,first_char first from car_brand order by first_char;
+  </select>
+</mapper>
